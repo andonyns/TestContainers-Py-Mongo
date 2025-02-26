@@ -1,0 +1,17 @@
+certifi==2025.1.31
+charset-normalizer==3.4.1
+docker==7.1.0
+idna==3.10
+iniconfig==2.0.0
+packaging==24.2
+pluggy==1.5.0
+psycopg==3.2.5
+psycopg-binary==3.2.5
+psycopg-pool==3.2.5
+pytest==8.3.4
+python-dotenv==1.0.1
+requests==2.32.3
+testcontainers==4.9.1
+typing_extensions==4.12.2
+urllib3==2.3.0
+wrapt==1.17.2
