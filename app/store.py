@@ -1,47 +1,18 @@
-# import time
+import time
 
-from db.connection import get_connection
+from db.connection import Connection
 from app.customers import Customer
 
+connection = Connection()
+conn = connection.get_connection()
+
 class Store:
-    def create_table(self):
-        print("Getting connection")
-        with get_connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute("""
-                    CREATE TABLE customers (
-                        id serial PRIMARY KEY,
-                        name varchar not null,
-                        email varchar not null unique)
-                    """)
-                conn.commit()
 
     def create_customer(self, name, email):
-        with get_connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute(
-                    "INSERT INTO customers (name, email) VALUES (%s, %s)", (name, email))
-                conn.commit()
-
+        conn.customers.insert_one({"name": name, "email": email})
 
     def get_all_customers(self) -> list[Customer]:
-        with get_connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute("SELECT * FROM customers")
-                # time.sleep(60)
-                return [Customer(cid, name, email) for cid, name, email in cur]
-
-
-    def get_customer_by_email(email) -> Customer:
-        with get_connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute("SELECT id, name, email FROM customers WHERE email = %s", (email,))
-                (cid, name, email) = cur.fetchone()
-                return Customer(cid, name, email)
-
-
-    def delete_all_customers():
-        with get_connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute("DELETE FROM customers")
-                conn.commit()
+        time.sleep(60 * 3)
+        res = conn.customers.find()
+        # print(res[])
+        return [Customer(cid, name, email) for cid, name, email in conn]
