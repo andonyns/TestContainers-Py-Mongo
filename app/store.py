@@ -1,4 +1,4 @@
-import time
+# import time
 
 from db.connection import Connection
 from app.customers import Customer
@@ -12,7 +12,6 @@ class Store:
         conn.customers.insert_one({"name": name, "email": email})
 
     def get_all_customers(self) -> list[Customer]:
-        time.sleep(60 * 3)
+        # time.sleep(60 * 3)
         res = conn.customers.find()
-        # print(res[])
-        return [Customer(cid, name, email) for cid, name, email in conn]
+        return [Customer(cid, name, email) for cid, name, email in res]
