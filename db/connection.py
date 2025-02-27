@@ -13,6 +13,3 @@ class Connection:
 
     def get_connection(self):
         return mongo.get_connection_client().test
-
-    def teardown(self):
-        mongo.stop()
